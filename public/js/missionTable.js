@@ -1,0 +1,1 @@
+function UpdateRow(e){var d=e.id,l=e.childNodes,o=l[1].childNodes[1].value,s=l[5].childNodes[1].value,i=l[11].childNodes[0].value,a=l[13].childNodes[1].value,c=l[25].childNodes[0].value,t=l[15].childNodes[0].value;axios.post("/mission/"+d,{status:o,min:s,user_id:i,lastPlayed:a,notes:c,completed:t}).catch(function(e){console.log(e)})}
