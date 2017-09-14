@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class Mission extends Model
 {
@@ -19,6 +20,15 @@ class Mission extends Model
     }
     public function  bugs(){
         return $this->hasMany('App\Bug');
+    }
+
+    public function hasAuthorID($id){
+        try {
+            return $this->user->id == $id;
+        }
+        catch (QueryException $e){
+            return false;
+        }
     }
 
 }

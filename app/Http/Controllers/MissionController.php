@@ -39,9 +39,27 @@ class MissionController extends Controller
         return view('missions.index', compact(['missionList','disabled','authorList']));
     }
 
+
+    //Accessed via update form and ajax requests from mission page, redirects to mission list of where the updated mission is from
+    public function Update(Request $request,$id){
+        Mission::find($id)->update($request->all());
+        return redirect('/missions?server=' . Mission::find($id)->serverNumber);
+    }
+
+
+    public function UpdatePage($id){
+        $mission = Mission::find($id);
+        if(auth()->user()->isRoleOrAbove('Game Admin') || $mission->hasAuthorID(auth()->id())) {
+            return view("missions.update", compact('mission'));
+        }
+        else dd('NO ACCESS');
+    }
+
+
+
     private function GetAuthorList()
     {
-       return  User::where(function ($query){
+        return  User::where(function ($query){
             return $query->where('role','Mission Dev')
                 ->orWhere('role','Game Admin')
                 ->orWhere('role','Senior Admin')->
@@ -49,8 +67,6 @@ class MissionController extends Controller
         })->get();
     }
 
-    public function Update(Request $request,$id){
-        Mission::find($id)->update($request->all());
-    }
+
 
 }
