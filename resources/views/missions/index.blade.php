@@ -51,7 +51,7 @@
                 <td>
                     <input onchange="UpdateRow(this.parentElement.parentElement)" {{$disabled==true?'disabled':''}} type="date" value="{{date("Y-m-d", strtotime($mission->lastPlayed)) }}">
                 </td>
-                <td><select onchange="UpdateRow(this.parentElement.parentElement)" name="completed" id="">
+                <td><select  {{$disabled==true?'disabled':''}} onchange="UpdateRow(this.parentElement.parentElement)" name="completed" id="">
                         <option {{$mission->completed == 1? 'selected':''}} value="1">Yes</option>
                         <option value="0" {{$mission->completed == 0? 'selected':''}}>No</option>
                     </select></td>
