@@ -19,8 +19,7 @@
 
 
         @endif
-
-
+        <div class="box">
         <form action="/mission/{{$mission->id}}" method="post">
             {{csrf_field()}}
 
@@ -174,6 +173,7 @@
 
 
         </form>
+    </div>
     </div>
 
 
