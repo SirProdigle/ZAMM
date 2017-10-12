@@ -18,8 +18,10 @@
         @endif
 
         <div class="box">
-            <form action="/mission/{{$mission->id}}" method="post">
+            <form action="/review" method="post">
                 {{csrf_field()}}
+                <input type="hidden" name="mission_id" value="{{$mission->id}}">
+
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
@@ -34,7 +36,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="briefing">
                                 </div>
                             </div>
                         </div>
@@ -48,7 +50,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="briefingDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>
@@ -70,7 +72,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="equipment">
                                 </div>
                             </div>
                         </div>
@@ -84,7 +86,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="equipmentDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>
@@ -106,7 +108,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="enemy">
                                 </div>
                             </div>
                         </div>
@@ -120,7 +122,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="enemyDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>
@@ -142,7 +144,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="location">
                                 </div>
                             </div>
                         </div>
@@ -156,7 +158,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="locationDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>
@@ -179,7 +181,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="objectives">
                                 </div>
                             </div>
                         </div>
@@ -193,7 +195,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="objectivesDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>
@@ -215,7 +217,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="enjoyment">
                                 </div>
                             </div>
                         </div>
@@ -229,7 +231,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="enjoymentDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>
@@ -252,7 +254,7 @@
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,2)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,3)"></i>
                                     <i class="fa fa-star-o " onclick="UpdateStarRating(this.parentElement,4)"></i>
-                                    <input type="hidden" name="Enemy-Rating">
+                                    <input type="hidden" name="competency">
                                 </div>
                             </div>
                         </div>
@@ -266,7 +268,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="competencyDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
                             </div>
                             <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
                         </div>

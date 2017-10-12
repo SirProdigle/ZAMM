@@ -23,6 +23,7 @@
 <script src="https://use.fontawesome.com/b46ab0ff9f.js"></script>
 <script src="/js/axios.js"></script>
 <script src="/js/missionTable.js"></script>
+<script src="/js/review.js"></script>
 
 
 </html>

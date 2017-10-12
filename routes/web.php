@@ -28,3 +28,5 @@ Route::post('/mission/{id}','MissionController@Update')->middleware('auth');
 Route::get('/mission/{id}', 'MissionController@UpdatePage')->middleware('auth');
 
 Route::get('/review/{id}', 'ReviewController@index');
+
+Route::post('/review','ReviewController@AddReview');

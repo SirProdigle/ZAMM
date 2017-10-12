@@ -9,3 +9,11 @@
   width: 900px;
   height: 100px;
 }
+
+.star-full{
+  color: yellow;
+}
+
+.rating-box i{
+  cursor: pointer;
+}

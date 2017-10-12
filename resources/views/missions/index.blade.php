@@ -57,12 +57,12 @@
                     </select></td>
                 <td class="text-center"><a href="#">27</a> </td>
                 <td class="text-center"><a href="#">4.7</a></td>
-                <td class="text-center"><a href="#">60</a></td>
+                <td class="text-center"><a href="/mission/{{$mission->id}}/reviews">{{$mission->reviews->count()}}</a></td>
                 <td>
                     {{date("Y-m-d", strtotime($mission->lastUpdated)) }}
                 </td>
                 <td><input onchange="UpdateRow(this.parentElement.parentElement)" type="text" value="{{$mission->notes}}"></td>
-                <td><a href="#">Review Link</a></td>
+                <td><a href="/review/{{$mission->id}}">Review Link</a></td>
 
                 <td><button class=" button is-info is-small">
                         <span class="icon">
