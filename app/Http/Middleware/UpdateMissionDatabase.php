@@ -3,7 +3,9 @@
 namespace App\Http\Middleware;
 
 use App\Mission;
+use App\MissionRequest;
 use Closure;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Mockery\Exception;
 use Psy\Exception\ErrorException;
@@ -131,6 +133,17 @@ class UpdateMissionDatabase
                 $missionData['max'] = $mission->maxPlayers;
                 $missionData['island'] = $mission->island;
                 $missionData['displayName'] = $mission->displayName;
+                try {
+                    $mRequest = MissionRequest::where('fileName', $missionData['fileName'])->firstOrFail();
+                    $missionData['user_id'] = $mRequest->user->id;
+                    $mRequest->delete();
+                }
+                catch (ModelNotFoundException $e){
+                    //No worries so just leave it
+                }
+
+
+
 
                 $missionsToInsert[] = $missionData;
 

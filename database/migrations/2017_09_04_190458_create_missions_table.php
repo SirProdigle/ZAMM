@@ -39,7 +39,6 @@ class CreateMissionsTable extends Migration
             $table->boolean('completed')->default(false);
             $table->string('minimumRequirements')->nullable();
             $table->integer('serverNumber');
-
             $table->unique(['fileName', 'serverNumber']);
         });
     }

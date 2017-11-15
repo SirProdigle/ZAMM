@@ -23,9 +23,14 @@ class ReviewController extends Controller
         if(auth()->check()){
             $review->user_id = auth()->id();
         }
+        $review->missionVersion = $review->mission->version;
         $review->save();
 
         return redirect("/"); //TODO Add some flash messaging
+    }
+
+    public function MissionReviews(Mission $mission){
+        return view('reviews.missionReviews',compact('mission'));
     }
 
 

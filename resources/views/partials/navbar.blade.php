@@ -24,9 +24,9 @@
     <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
             <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link  is-active">
+                <div class="navbar-link  is-active is-unselectable">
                     Mission Listings
-                </a>
+                </div>
                 <div class="navbar-dropdown ">
                     <a class="navbar-item " href="/missions?server=0">
                         Zeus Main
@@ -40,15 +40,15 @@
 
                 </div>
             </div>
-            <a class="navbar-item">
+            <a class="navbar-item" href="/mission/add">
                 Add A Mission
             </a>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link  is-active" href="/nations/{{auth()->id()}}">
+            <div class="navbar-item has-dropdown is-hoverable is-unselectable">
+                <div class="navbar-link  is-active">
                     Admin Panel
-                </a>
+                </div>
                 <div class="navbar-dropdown ">
-                    <a class="navbar-item " href="/nations/{{auth()->id()}}/stats">
+                    <a class="navbar-item " href="/users">
                         User Management
                     </a>
                     <a class="navbar-item " href="/nations/{{auth()->id()}}/messages/">

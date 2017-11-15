@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CanAccessUserMissions;
+use App\Http\Middleware\MustBeAdmin;
 use App\Http\Middleware\UpdateMissionDatabase;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -61,5 +62,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'userMissions' => CanAccessUserMissions::class,
         'updateMissions' => UpdateMissionDatabase::class,
+        'mustBeAdmin' => MustBeAdmin::class,
     ];
 }

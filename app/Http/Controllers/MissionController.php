@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mission;
+use App\MissionRequest;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\DocBlock\Tags\Author;
@@ -42,7 +43,13 @@ class MissionController extends Controller
 
     //Accessed via update form and ajax requests from mission page, redirects to mission list of where the updated mission is from
     public function Update(Request $request,$id){
+        //FIXME This will always trigger Pending Details > New even if the full details were not input. This is because         changing things on the homepage also trigger this function
         Mission::find($id)->update($request->all());
+        $mis = Mission::find($id);
+        if($mis->status == "Pending Details") {
+            $mis->status = "New";
+            $mis->save();
+        }
         return redirect('/missions?server=' . Mission::find($id)->serverNumber);
     }
 
@@ -55,6 +62,29 @@ class MissionController extends Controller
         else dd('NO ACCESS');
     }
 
+    public function AddMission(){
+        if(!auth()->user()->isRoleOrAbove('Mission Dev')){
+            //Shouldn't be here
+            return redirect('/');
+        }
+        $mRequest = new MissionRequest();
+        $mRequest->fileName = \request()->fileName;
+        $mRequest->user_id = auth()->user()->id;
+
+
+        try{
+            $mRequest->save();
+            return back()->with('status-success','Mission Request Added');
+        }
+        catch(\Exception $e){
+            return back()->with('status-danger',$e->getCode());
+        }
+
+    }
+
+    public function Download(){
+
+    }
 
 
     private function GetAuthorList()

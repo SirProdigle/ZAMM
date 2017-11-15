@@ -30,6 +30,14 @@ class Mission extends Model
             return false;
         }
     }
+    public function GetOverallScore(){
+        return ($this->reviews()->avg('briefing')+
+            $this->reviews()->avg('equipment')+
+            $this->reviews()->avg('enemy')+
+            $this->reviews()->avg('location')+
+            $this->reviews()->avg('objectives')+
+            $this->reviews()->avg('enjoyment'))/6;
+    }
 
 }
 

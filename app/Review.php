@@ -13,5 +13,23 @@ class Review extends Model
         return $this->belongsTo('App\Mission');
     }
 
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+    public function  IsTextReview(){
+        if($this->briefingDescription != "" ||
+            $this->equipmentDescription != "" ||
+            $this->enemyDescription != "" ||
+            $this->locationDescription != ""||
+            $this->objectivesDescription != ""||
+            $this->enjoymentDescription != ""){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 
 }

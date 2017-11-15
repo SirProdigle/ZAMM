@@ -17,22 +17,23 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('briefing');
-            $table->string('briefingDescription')->nullable();
+            $table->text('briefingDescription')->nullable();
             $table->integer('equipment');
-            $table->string('equipmentDescription')->nullable();
+            $table->text('equipmentDescription')->nullable();
             $table->integer('enemy');
-            $table->string('enemyDescription')->nullable();
+            $table->text('enemyDescription')->nullable();
             $table->integer('location');
-            $table->string('locationDescription')->nullable();
+            $table->text('locationDescription')->nullable();
             $table->integer('objectives');
-            $table->string('objectivesDescription')->nullable();
+            $table->text('objectivesDescription')->nullable();
             $table->integer('enjoyment');
-            $table->string('enjoymentDescription')->nullable();
+            $table->text('enjoymentDescription')->nullable();
             $table->integer('competency');
-            $table->string('competencyDescription')->nullable();
+            $table->text('competencyDescription')->nullable();
             $table->string('ip');
             $table->string('mission_id');
             $table->string('user_id')->nullable();
+            $table->string('missionVersion');
         });
     }
 

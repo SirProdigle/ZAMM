@@ -2,6 +2,7 @@
 
 namespace App;
 
+use function GuzzleHttp\default_ca_bundle;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -49,6 +50,8 @@ class User extends Authenticatable
             case 'User':
                 return auth()->check();
                 break;
+            default:
+                return false;
         }
     }
 
@@ -57,6 +60,14 @@ class User extends Authenticatable
     public function missions()
     {
         return $this->hasMany(Mission::class);
+    }
+
+    public function reviews(){
+        return $this->hasMany(Review::class);
+    }
+
+    public function missionRequests(){
+        return $this->hasMany(MissionRequest::class);
     }
 
 

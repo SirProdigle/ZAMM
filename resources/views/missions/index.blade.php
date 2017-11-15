@@ -55,8 +55,8 @@
                         <option {{$mission->completed == 1? 'selected':''}} value="1">Yes</option>
                         <option value="0" {{$mission->completed == 0? 'selected':''}}>No</option>
                     </select></td>
-                <td class="text-center"><a href="#">27</a> </td>
-                <td class="text-center"><a href="#">4.7</a></td>
+                <td class="text-center"><a href="#">NOT IN USE</a> </td>
+                <td class="text-center"><a href="/mission/{{$mission->id}}/reviews">{{number_format($mission->GetOverallScore(),1) }}</a></td>
                 <td class="text-center"><a href="/mission/{{$mission->id}}/reviews">{{$mission->reviews->count()}}</a></td>
                 <td>
                     {{date("Y-m-d", strtotime($mission->lastUpdated)) }}

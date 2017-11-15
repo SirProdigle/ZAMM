@@ -24,6 +24,7 @@
 <script src="/js/axios.js"></script>
 <script src="/js/missionTable.js"></script>
 <script src="/js/review.js"></script>
+<script src="/js/accounts.js"></script>
 
 
 </html>

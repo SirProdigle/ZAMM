@@ -34,5 +34,8 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'sparkpost' => [
+        'secret' => '5c2fc1c66f6a0d16527df1cb30ba4fe2f1bb7ed3',
+    ],
 
 ];
