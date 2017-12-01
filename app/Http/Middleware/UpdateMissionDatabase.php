@@ -124,6 +124,12 @@ class UpdateMissionDatabase
                 $newMission->max = $mission->maxPlayers;
                 $newMission->island = $mission->island;
                 $newMission->displayName = $mission->displayName;
+                try{
+                    $newMission->save(); //TODO replace this with the mass array insertion
+                }
+                catch(QueryException $e){
+
+                }
 
                 $missionData = [];
                 $missionData['fileName'] = $mission->fileName;
@@ -149,9 +155,8 @@ class UpdateMissionDatabase
 
         }
 
-       // dd($missionsToInsert);
 
-            Mission::insert($missionsToInsert);
+            //Mission::insert($missionsToInsert); FIXME This only works if the entire array is correctly formatted. Add one after the other for now
 
 
 

@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        \Schema::defaultStringLength(191); //Production server needs this as it uses an old MYSQL version FIXME
     }
 
     /**
