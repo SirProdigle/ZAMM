@@ -38,5 +38,20 @@ class AccountController extends Controller
         return;
     }
 
+    public function DemoteUser(User $targetUser,User $activeUser,$role){
+        if($activeUser->IsRoleOrAbove('Senior Admin')){
+            if($activeUser->IsAboveRole($targetUser) && $activeUser->IsAboveRole($role)){
+                $targetUser->role = $role;
+                return "OK";
+            }
+            else{
+                return "You need to be a higher role than the person you are demoting AND be demoting them to a level below you";
+            }
+        }
+        else{
+            return "You do not have the right prvilleges to change role";
+        }
+    }
+
 
 }

@@ -33,27 +33,77 @@ class User extends Authenticatable
     {
         switch ($role) {
             case 'Super Admin':
-                return auth()->user()->role == "Super Admin";
+                return $this->role == "Super Admin";
                 break;
             case 'Senior Admin':
-                return auth()->user()->role == "Super Admin" ||
-                    auth()->user()->role == "Senior Admin";
+                return $this->role == "Super Admin" ||
+                    $this->role == "Senior Admin";
                 break;
             case 'Game Admin':
-                return auth()->user()->role == "Super Admin" ||
-                    auth()->user()->role == "Senior Admin" ||
-                    auth()->user()->role == "Game Admin";
+                return $this->role == "Super Admin" ||
+                    $this->role == "Senior Admin" ||
+                    $this->role == "Game Admin";
                 break;
             case 'Mission Dev':
-                return auth()->user()->role != "User";
+                return $this->role != "User";
                 break;
             case 'User':
-                return auth()->check();
+                return$this->role != null;
                 break;
             default:
                 return false;
         }
     }
+    public function IsAboveRole($role)
+    {
+        switch ($role) {
+            case 'Super Admin':
+                return false;
+                break;
+            case 'Senior Admin':
+                return $this->role == "Super Admin";
+                break;
+            case 'Game Admin':
+                return $this->role == "Super Admin" ||
+                    $this->role == "Senior Admin";
+                break;
+            case 'Mission Dev':
+                return $this->role == "Super Admin" ||
+                    $this->role == "Senior Admin" ||
+                    $this->role == "Game Admin";
+                break;
+            case 'User':
+                return $this->role != "User";
+                break;
+            default:
+                return false;
+        }
+    }
+
+
+    public function IsBelowRole($role)
+    {
+        switch ($role) {
+            case 'Super Admin':
+                return $this->role != 'Super Admin';
+                break;
+            case 'Senior Admin':
+                return $this->role != "Super Admin" && $this->role != 'Senior Admin';
+                break;
+            case 'Game Admin':
+                return $this->role != "Super Admin" && $this->role != 'Senior Admin' && $this->role != 'Game Admin';
+                break;
+            case 'Mission Dev':
+                return $this->role == 'User';
+                break;
+            case 'User':
+                return false;
+                break;
+            default:
+                return false;
+        }
+    }
+
 
 
 

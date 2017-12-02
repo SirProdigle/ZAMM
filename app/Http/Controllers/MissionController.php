@@ -45,11 +45,11 @@ class MissionController extends Controller
     public function Update(Request $request,$id){
         //FIXME This will always trigger Pending Details > New even if the full details were not input. This is because         changing things on the homepage also trigger this function
         Mission::find($id)->update($request->all());
-        $mis = Mission::find($id);
-        if($mis->status == "Pending Details") {
-            $mis->status = "New";
-            $mis->save();
-        }
+            $mis = Mission::find($id);
+            if ($mis->status == "Pending Details" && strpos($request->header('referer'),'mission/') != false) { //Only set to new if the page we came from was the mission update page. Hacky fix but works
+                $mis->status = "New";
+                $mis->save();
+            }
         return redirect('/missions?server=' . Mission::find($id)->serverNumber);
     }
 

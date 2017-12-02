@@ -66,7 +66,7 @@ class UpdateMissionDatabase
 
                     }
                     //Remove from list to insert
-                    for ($x = 0; $x< count($missionList); $x++){
+                    for ($x = 0; $x < count($missionList); $x++) {
                         if ($missionList[$x]->fileName == $fileMission->fileName) {
                             unset($missionList[$x]);
                             $missionList = array_values($missionList);
@@ -95,8 +95,8 @@ class UpdateMissionDatabase
 
                     }
                     //We need to remove this copy from our listing
-                    for ($x = 0; $x< count($missionList); $x++){
-                        if($missionList[$x]->fileName == $fileMission->fileName){
+                    for ($x = 0; $x < count($missionList); $x++) {
+                        if ($missionList[$x]->fileName == $fileMission->fileName) {
                             unset($missionList[$x]);
                             $missionList = array_values($missionList);
                             break;
@@ -115,52 +115,34 @@ class UpdateMissionDatabase
     {
         $missionsToInsert = [];
         \DB::disableQueryLog();
-        foreach ($missionList as $mission){
-                $newMission = new Mission();
-                $newMission->fileName = $mission->fileName;
-                $newMission->serverNumber = $mission->server;
-                $newMission->version = $mission->version;
-                $newMission->gameType = $mission->gameType;
-                $newMission->max = $mission->maxPlayers;
-                $newMission->island = $mission->island;
-                $newMission->displayName = $mission->displayName;
-                try{
-                    $newMission->save(); //TODO replace this with the mass array insertion
-                }
-                catch(QueryException $e){
+        foreach ($missionList as $mission) {
+            $newMission = new Mission();
+            $newMission->fileName = $mission->fileName;
+            $newMission->serverNumber = $mission->server;
+            $newMission->version = $mission->version;
+            $newMission->gameType = $mission->gameType;
+            $newMission->max = $mission->maxPlayers;
+            $newMission->island = $mission->island;
+            $newMission->displayName = $mission->displayName;
 
-                }
-
-                $missionData = [];
-                $missionData['fileName'] = $mission->fileName;
-                $missionData['serverNumber'] = $mission->server;
-                $missionData['version'] = $mission->version;
-                $missionData['gameType'] = $mission->gameType;
-                $missionData['max'] = $mission->maxPlayers;
-                $missionData['island'] = $mission->island;
-                $missionData['displayName'] = $mission->displayName;
-                try {
-                    $mRequest = MissionRequest::where('fileName', $missionData['fileName'])->firstOrFail();
-                    $missionData['user_id'] = $mRequest->user->id;
-                    $mRequest->delete();
-                }
-                catch (ModelNotFoundException $e){
-                    //No worries so just leave it
-                }
-
-
-
-
-                $missionsToInsert[] = $missionData;
-
+            $missionData = [];
+            $missionData['fileName'] = $mission->fileName;
+            $missionData['serverNumber'] = $mission->server;
+            $missionData['version'] = $mission->version;
+            $missionData['gameType'] = $mission->gameType;
+            $missionData['max'] = $mission->maxPlayers;
+            $missionData['island'] = $mission->island;
+            $missionData['displayName'] = $mission->displayName;
+            try {
+                $mRequest = MissionRequest::where('fileName', $missionData['fileName'])->firstOrFail();
+                $missionData['user_id'] = $mRequest->user->id;
+                $mRequest->delete();
+            } catch (ModelNotFoundException $e) {
+                //No worries so just leave it
+            }
+            $missionsToInsert[] = $missionData;
         }
-
-
-            //Mission::insert($missionsToInsert); FIXME This only works if the entire array is correctly formatted. Add one after the other for now
-
-
-
-
+        Mission::insert($missionsToInsert); //FIXME This only works if the entire array is correctly formatted. Add one after the other for now
         \DB::enableQueryLog();
     }
 
@@ -185,7 +167,8 @@ class UpdateMissionDatabase
 }
 
 
-class MissionData{
+class MissionData
+{
     public $fileName;
     public $server;
     public $version;
@@ -194,18 +177,17 @@ class MissionData{
     public $island;
     public $displayName;
 
-    public function  __construct($fileName, $server)
+    public function __construct($fileName, $server)
     {
         $this->fileName = $fileName;
         $this->server = $server;
         try {
             $this->version = substr(explode(' v', $this->fileName)[1], 0, 2);
             $this->version = preg_replace("/[^0-9]/", "", $this->version);
-            if($this->version == ''){
+            if ($this->version == '') {
                 $this->version = 1;
             }
-        }
-        catch (\ErrorException $e){
+        } catch (\ErrorException $e) {
             $this->version = 1;
         }
         if (isset(explode(' ', $this->fileName)[0])) {
@@ -221,10 +203,11 @@ class MissionData{
         $this->displayName = explode(' ', $this->fileName);
         unset($this->displayName[1]);
         unset($this->displayName[0]);
-        $this->displayName = implode(' ',$this->displayName);
+        $this->displayName = implode(' ', $this->displayName);
     }
 
-     private function GetNonVersionName(){
-       return  explode(' v', $this->fileName)[0];
+    private function GetNonVersionName()
+    {
+        return explode(' v', $this->fileName)[0];
     }
 }
