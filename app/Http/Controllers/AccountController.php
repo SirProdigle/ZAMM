@@ -49,7 +49,7 @@ class AccountController extends Controller
             }
         }
         else{
-            return "You do not have the right prvilleges to change role";
+            return "You do not have the right privileges to change role";
         }
     }
 

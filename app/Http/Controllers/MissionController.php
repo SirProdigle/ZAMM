@@ -48,6 +48,7 @@ class MissionController extends Controller
             $mis = Mission::find($id);
             if ($mis->status == "Pending Details" && strpos($request->header('referer'),'mission/') != false) { //Only set to new if the page we came from was the mission update page. Hacky fix but works
                 $mis->status = "New";
+                $mis->user_id = auth()->id();
                 $mis->save();
             }
         return redirect('/missions?server=' . Mission::find($id)->serverNumber);
