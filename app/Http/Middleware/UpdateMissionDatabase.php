@@ -50,36 +50,35 @@ class UpdateMissionDatabase
 
         $Server0MissionsDatabase = Mission::where('serverNumber', 0)->get();
 
+        $indicesToRemove = [];
         foreach ($Server0MissionsDatabase as $dbMission) {
 
             foreach ($Server0MissionsFile as $fileMission) {
-
                 if (explode(' v', $dbMission->fileName)[0] == explode(' v', $fileMission->fileName)[0]) {
                     if ($dbMission->version < $fileMission->version) {
                         //Needs to be updated;
-
                         //dd("Db: " . $dbMission->fileName . " " . $dbMission->version . "\nFile: " . $fileMission->fileName . " " . $fileMission->version);
-
                         $dbMission->version = $fileMission->version;
                         $dbMission->save();
-
-
                     }
                     //Remove from list to insert
                     for ($x = 0; $x < count($missionList); $x++) {
                         if ($missionList[$x]->fileName == $fileMission->fileName) {
-                            unset($missionList[$x]);
-                            $missionList = array_values($missionList);
+                            $indicesToRemove[] = $x;
+                            //unset($missionList[$x]);
+                            //$missionList = array_values($missionList);
                             break;
                         }
                     }
                 }
             }
         }
-
+        $missionList = array_diff_key($missionList, array_flip($indicesToRemove));
+        $missionList = array_values($missionList);
 
         $Server1MissionsDatabase = Mission::where('serverNumber', 1)->get();
 
+        $indicesToRemove = [];
         foreach ($Server1MissionsDatabase as $dbMission) {
 
             foreach ($Server1MissionsFile as $fileMission) {
@@ -97,8 +96,9 @@ class UpdateMissionDatabase
                     //We need to remove this copy from our listing
                     for ($x = 0; $x < count($missionList); $x++) {
                         if ($missionList[$x]->fileName == $fileMission->fileName) {
-                            unset($missionList[$x]);
-                            $missionList = array_values($missionList);
+                            $indicesToRemove[] = $x;
+                            //unset($missionList[$x]);
+                            //$missionList = array_values($missionList);
                             break;
                         }
                     }
@@ -106,7 +106,8 @@ class UpdateMissionDatabase
             }
         }
 
-
+        $missionList = array_diff_key($missionList, array_flip($indicesToRemove));
+        $missionList = array_values($missionList);
         return $missionList;
     }
 
@@ -161,7 +162,6 @@ class UpdateMissionDatabase
                 }
             }
         }
-
         return $missionsToReturn;
     }
 }
@@ -184,7 +184,7 @@ class MissionData
         try {
             $this->version = substr(explode(' v', $this->fileName)[1], 0, 2);
             $this->version = preg_replace("/[^0-9]/", "", $this->version);
-            if ($this->version == '') {
+            if (strpos($this->version, '')) {
                 $this->version = 1;
             }
         } catch (\ErrorException $e) {
@@ -195,6 +195,9 @@ class MissionData
         }
         if (isset(explode(' ', $this->fileName)[1])) {
             $this->maxPlayers = explode(' ', $this->fileName)[1];
+            if ($this->maxPlayers == '' || !is_numeric($this->maxPlayers)) {
+                $this->maxPlayers = -1; //If max players not parsed correctly this is our error code
+            }
         }
         if (isset(explode('.', $this->fileName)[1])) {
             $this->island = explode('.', $this->fileName)[1];

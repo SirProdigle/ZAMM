@@ -1,6 +1,4 @@
 @extends('layouts.master')
-
-
 @section('content')
 
     <table class="table is-narrow">
@@ -43,7 +41,7 @@
                 <td><select name="user_id" onchange="UpdateRow(this.parentElement.parentElement)" {{$disabled==true?'disabled':''}}>
                         <option {{$mission->user_id == null? 'selected':''}}>???</option>
                         @foreach($authorList as $author)
-                            <option value="{{$author->id}}" {{$mission->user == auth()->user()? 'selected':''}}>{{$author->name}}</option>
+                            <option value="{{$author->id}}" {{$mission->user_id == $author->id? 'selected':''}}>{{$author->name}}</option>
                         @endforeach
 
                     </select></td>
