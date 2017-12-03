@@ -84,3 +84,18 @@ function sortTable(sorterID) {
     }
 }
 
+function DeleteMission(id, ElementToDestroy){
+    axios.get('/mission/' + id+'/delete', {
+
+    }).catch(function(error){
+        console.log(error);
+        //alert(error);
+    }).then(function (response) {
+        alert(response.data);
+        ElementToDestroy.innerHTML = "";
+
+        //alert(response);
+    })
+
+}
+

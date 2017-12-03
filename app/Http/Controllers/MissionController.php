@@ -86,6 +86,16 @@ class MissionController extends Controller
     public function Download(){
 
     }
+    public function Delete(Mission $mission){
+        try {
+            $mission->delete();
+            return ("Deleted Successfully");
+        }
+        catch (\Exception $e){
+            return $e->getMessage();
+        }
+
+    }
 
 
     private function GetAuthorList()
