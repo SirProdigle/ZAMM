@@ -99,3 +99,34 @@ function DeleteMission(id, ElementToDestroy){
 
 }
 
+function AddStatusClass(Status, ele){
+    console.log("S " +Status);
+    switch (Status){
+        case "Online":{
+            ele.classList = null;
+            ele.classList.add('is-online');
+            break;
+        }
+        case "Updated":{
+            ele.classList = null;
+            ele.classList.add('is-updated');
+            break;
+        }
+        case "New":{
+            ele.classList = null;
+            ele.classList.add('is-new');
+            break;
+        }
+        case "Broken":{
+            ele.classList = null;
+            ele.classList.add('is-broken');
+            break;
+        }
+        case "Pending Details":{
+            ele.classList = null;
+            ele.classList.add('is-pending');
+            break;
+        }
+    }
+}
+

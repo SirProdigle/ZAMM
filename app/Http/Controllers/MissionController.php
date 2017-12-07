@@ -13,7 +13,7 @@ class MissionController extends Controller
     //
     public function index(Request $request)
     {
-        $missionList = Mission::where('serverNumber', $request->query('server'))->get();
+        $missionList = Mission::where('serverNumber', $request->query('server'))->orderBy('gameType')->orderBy('max','desc')->get();
         if(auth()->user() != null){
            if(auth()->user()->isRoleOrAbove('Game Admin')){
                $disabled = false;

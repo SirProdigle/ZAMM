@@ -12,7 +12,14 @@ class AccountController extends Controller
 
     public function  index(){
         $users = User::all();
-        return view('accounts.index',compact('users'));
+        $roles= ["User","Mission Dev","Game Admin", "Senior Admin", "Super Admin"];
+        $finalRoles =[];
+        foreach($roles as $potRole){
+            if(auth()->user()->IsAboveRole($potRole)){
+                $finalRoles[] = $potRole;
+            }
+        }
+        return view('accounts.index',compact(['users','finalRoles']));
     }
 
     //TODO test
@@ -38,14 +45,17 @@ class AccountController extends Controller
         return;
     }
 
-    public function DemoteUser(User $targetUser,User $activeUser,$role){
-        if($activeUser->IsRoleOrAbove('Senior Admin')){
-            if($activeUser->IsAboveRole($targetUser) && $activeUser->IsAboveRole($role)){
-                $targetUser->role = $role;
+    public function ChangeRole(User $user){
+        $role = \request()->role;
+        $activeUser = auth()->user();
+        if($activeUser->IsRoleOrAbove('Game Admin')){
+            if($activeUser->IsAboveRole($user->role) && $activeUser->IsAboveRole($role)){
+                $user->role = $role;
+                $user->save();
                 return "OK";
             }
             else{
-                return "You need to be a higher role than the person you are demoting AND be demoting them to a level below you";
+                return "You need to be a higher role than the person you are changing AND be changing them to a level below you";
             }
         }
         else{

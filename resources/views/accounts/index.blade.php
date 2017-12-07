@@ -19,20 +19,33 @@
 
         <tbody>
         @foreach ($users as $user)
-            <tr>
+            <tr id="{{$user->id}}">
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->role}}</td>
+                <td> @if (!auth()->user()->IsAboveRole($user->role))
+                        {{$user->role}}
+                    @else
+                    <select onchange="ChangeUserRoleAjax(this.parentElement.parentElement.id,this.value)">
+                        @foreach($finalRoles as $role)
+                            <option @if($role == $user->role){{"selected"}} @endif>{{$role}}</option>
+                            @endforeach
+                    </select>
+                    @endif
+                </td>
                 <td>{{$user->missions()->count()}}</td>
                 <td>{{$user->reviews()->count()}}</td>
                 @if(auth()->user()->IsRoleOrAbove('Senior Admin'))
                     <td>@if($user->reviews()->count() > 0)
-                        {{$user->reviews()->orderby('created_at','desc')->first()->ip}}</td>
-                    @endif
+                            {{$user->reviews()->orderby('created_at','desc')->first()->ip}}</td>
+                @endif
                 @else
                     0
                 @endif
-                <td><button class="button is-danger is-small" onclick="DeleteUserAjax({{$user->id}},this.parentElement)">Delete</button></td>
+                <td>
+                    <button class="button is-danger is-small"
+                            onclick="DeleteUserAjax( {{$user->id}} ,this.parentElement)">Delete
+                    </button>
+                </td>
             </tr>
         @endforeach
         </tbody>

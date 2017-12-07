@@ -155,7 +155,7 @@
                 <div class="field-body">
                     <div class="field">
                         <p class="control">
-                            <textarea name="notes" class="textarea" id="" cols="20" rows="2">{{$mission->notes}}</textarea>
+                            <textarea name="misc" class="textarea" id="" cols="20" rows="2">{{$mission->misc}}</textarea>
                         </p>
                     </div>
                 </div>

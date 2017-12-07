@@ -29,12 +29,31 @@
             <tr id="{{$mission->id}}">
                 <td>
                     <select name="status"
-                            {{$disabled==true?'disabled':''}} onchange="UpdateRow(this.parentElement.parentElement)">
-                        <option {{$mission->status == 'Online'? 'selected':''}}>Online</option>
-                        <option {{$mission->status == 'Updated'? 'selected':''}}>Updated</option>
-                        <option {{$mission->status == 'New'? 'selected':''}}>New</option>
-                        <option {{$mission->status == 'Broken'? 'selected':''}}>Broken</option>
-                        <option {{$mission->status == 'Pending Details'? 'selected':''}}>Pending Details</option>
+                            @switch($mission->status)
+                            @case('Online')
+                            {{"class=is-online"}}
+                            @break
+                            @case('Updated')
+                            {{"class=is-updated"}}
+                            @break
+                            @case('New')
+                            {{"class=is-new"}}
+                            @break
+                            @case('Broken')
+                            {{"class=is-broken"}}
+                            @break
+                            @case('Pending Details')
+                            {{"class=is-pending"}}
+                            @break
+                            @endswitch
+                            {{$disabled==true?'disabled':''}} onchange="UpdateRow(this.parentElement.parentElement); AddStatusClass(this.value,this)">
+                        <option class="is-online" {{$mission->status == 'Online'? 'selected':''}}>Online</option>
+                        <option class="is-updated" {{$mission->status == 'Updated'? 'selected':''}}>Updated</option>
+                        <option class="is-new" {{$mission->status == 'New'? 'selected':''}}>New</option>
+                        <option class="is-broken" {{$mission->status == 'Broken'? 'selected':''}}>Broken</option>
+                        <option class="is-pending" {{$mission->status == 'Pending Details'? 'selected':''}}>Pending
+                            Details
+                        </option>
                     </select>
                 </td>
                 <td>{{$mission->gameType}}</td>

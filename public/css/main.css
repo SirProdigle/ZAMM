@@ -1,19 +1,45 @@
 .text-center {
-  text-align: center; }
-
-.rating-box i{
-  font-size: 30px;
+    text-align: center;
 }
 
-.control textarea{
-  width: 900px;
-  height: 100px;
+.rating-box i {
+    font-size: 30px;
 }
 
-.star-full{
-  color: yellow;
+.control textarea {
+    width: 900px;
+    height: 100px;
 }
 
-.rating-box i{
-  cursor: pointer;
+.star-full {
+    color: yellow;
+}
+
+.rating-box i {
+    cursor: pointer;
+}
+
+.is-broken {
+    background-color: darkred;
+    color: yellow;
+}
+
+.is-online {
+    background-color: darkgreen;
+    color: white;
+}
+
+.is-updated {
+    background-color: darkgreen;
+    color: orangered;
+}
+
+.is-new {
+background-color: darkgreen;
+    color: yellow;
+}
+
+.is-pending {
+    background-color: orangered;
+    color: white;
 }

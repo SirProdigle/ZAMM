@@ -41,3 +41,5 @@ Route::post('/users/{id}/delete','AccountController@RemoveUser')->middleware('au
 
 Route::get('/mission/{mission}/delete','MissionController@Delete')->middleware(['auth','mustBeAdmin']);
 
+Route::post('/users/{user}/role','AccountController@ChangeRole')->middleware('auth');
+
