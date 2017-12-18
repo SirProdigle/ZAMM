@@ -17,14 +17,14 @@
 @yield('content')
 
 
-
-</body>
 <script src="/js/navbar.js"></script>
 <script src="https://use.fontawesome.com/b46ab0ff9f.js"></script>
 <script src="/js/axios.js"></script>
 <script src="/js/missionTable.js"></script>
 <script src="/js/review.js"></script>
 <script src="/js/accounts.js"></script>
+</body>
+
 
 
 </html>

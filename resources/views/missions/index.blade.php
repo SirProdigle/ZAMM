@@ -95,7 +95,7 @@
                            value="{{$mission->notes}}"></td>
                 <td><a href="/review/{{$mission->id}}">Review Link</a></td>
 
-                <td>
+                <td class="is-centered">
                     <button class=" button is-info is-small">
                         <span class="icon">
                             <i class="fa fa-save"></i>
