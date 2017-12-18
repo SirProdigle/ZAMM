@@ -29,10 +29,10 @@
                 </div>
                 <div class="navbar-dropdown ">
                     <a class="navbar-item " href="/missions?server=0">
-                        Zeus Main
+                        Zeus #1 Vanilla
                     </a>
                     <a class="navbar-item " href="/missions?server=1">
-                        Zeus Addon
+                        Zeus #2 Addon
                     </a>
                     <a class="navbar-item " href="/user/{{auth()->id()}}/missions">
                         My Missions
@@ -66,15 +66,13 @@
                 <a class="navbar-link  is-active" href="/internationalorganisations/description">
                     My Account
                 </a>
-                @if(!auth()->check())
-                    <div class="navbar-dropdown ">
-                        <a class="navbar-item " href="/password/reset">
-                            Change Password
-                        </a>
-                    </div>
-                @endif
             </div>
         </div>
+        @if(!auth()->check())
+                <a class="navbar-item " href="/password/reset">
+                    Forgot/Reset Password
+                </a>
+        @endif
 
         <div class="navbar-end">
 

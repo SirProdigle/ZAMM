@@ -55,11 +55,19 @@ class UpdateMissionDatabase
 
             foreach ($Server0MissionsFile as $fileMission) {
                 if (explode(' v', $dbMission->fileName)[0] == explode(' v', $fileMission->fileName)[0]) {
-                    if ($dbMission->version < $fileMission->version) {
+                    if ($dbMission->version < $fileMission->version && $dbMission->island == $fileMission->island) {
                         //Needs to be updated;
                         //dd("Db: " . $dbMission->fileName . " " . $dbMission->version . "\nFile: " . $fileMission->fileName . " " . $fileMission->version);
                         $dbMission->version = $fileMission->version;
+                        $dbMission->fileName = $fileMission->fileName;
+                        $tempDName = explode(' ', $dbMission->fileName);
+                        unset($tempDName[1]);
+                        unset($tempDName[0]);
+                        $dbMission->displayName = implode(' ', $tempDName);
+                        $dbMission->status = 'Updated';
+
                         $dbMission->save();
+
                     }
                     //Remove from list to insert
                     for ($x = 0; $x < count($missionList); $x++) {
@@ -122,7 +130,7 @@ class UpdateMissionDatabase
             $newMission->serverNumber = $mission->server;
             $newMission->version = $mission->version;
             $newMission->gameType = $mission->gameType;
-            $newMission->max = $mission->maxPlayers;
+            $newMission->max = $mission->max;
             $newMission->island = $mission->island;
             $newMission->displayName = $mission->displayName;
 
@@ -131,7 +139,7 @@ class UpdateMissionDatabase
             $missionData['serverNumber'] = $mission->server;
             $missionData['version'] = $mission->version;
             $missionData['gameType'] = $mission->gameType;
-            $missionData['max'] = $mission->maxPlayers;
+            $missionData['max'] = $mission->max;
             $missionData['island'] = $mission->island;
             $missionData['displayName'] = $mission->displayName;
             try {
@@ -173,7 +181,7 @@ class MissionData
     public $server;
     public $version;
     public $gameType;
-    public $maxPlayers;
+    public $max;
     public $island;
     public $displayName;
 
@@ -185,18 +193,19 @@ class MissionData
             $this->version = substr(explode(' v', $this->fileName)[1], 0, 2);
             $this->version = preg_replace("/[^0-9]/", "", $this->version);
             if (strpos($this->version, '')) {
-                $this->version = 1;
             }
+            echo ($this->version);
         } catch (\ErrorException $e) {
-            $this->version = 1;
+            //$this->version = 1;
+            //die($e);
         }
         if (isset(explode(' ', $this->fileName)[0])) {
             $this->gameType = explode(' ', $this->fileName)[0];
         }
         if (isset(explode(' ', $this->fileName)[1])) {
-            $this->maxPlayers = explode(' ', $this->fileName)[1];
-            if ($this->maxPlayers == '' || !is_numeric($this->maxPlayers)) {
-                $this->maxPlayers = -1; //If max players not parsed correctly this is our error code
+            $this->max = explode(' ', $this->fileName)[1];
+            if ($this->max == '' || !is_numeric($this->max)) {
+                $this->max = -1; //If max players not parsed correctly this is our error code
             }
         }
         if (isset(explode('.', $this->fileName)[1])) {

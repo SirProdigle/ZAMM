@@ -85,6 +85,9 @@ function sortTable(sorterID) {
 }
 
 function DeleteMission(id, ElementToDestroy){
+    if(confirm("Really Delete Mission?") === false){
+        return;
+    }
     axios.get('/mission/' + id+'/delete', {
 
     }).catch(function(error){

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-    <table class="table is-narrow">
+    <table class="table is-narrow is-fullwidth is-striped">
         <thead>
         <tr>
             <th onclick="FilterBy('Status')"><a href="#">Status</a></th>
@@ -82,7 +82,7 @@
                         <option {{$mission->completed == 1? 'selected':''}} value="1">Yes</option>
                         <option value="0" {{$mission->completed == 0? 'selected':''}}>No</option>
                     </select></td>
-                <td class="text-center"><a href="#">NOT IN USE</a></td>
+                <td class="text-center"><a href="#">N/A</a></td>
                 <td class="text-center"><a
                             href="/mission/{{$mission->id}}/reviews">{{number_format($mission->GetOverallScore(),1) }}</a>
                 </td>
@@ -100,7 +100,6 @@
                         <span class="icon">
                             <i class="fa fa-save"></i>
                         </span>
-                        <span>Download</span>
                     </button>
                 </td>
                 @if(auth()->user()->IsRoleOrAbove('Game Admin'))
@@ -110,7 +109,6 @@
                         <span class="icon">
                             <i class="fa fa-close"></i>
                         </span>
-                            <span>Delete</span>
                         </button>
                     </td>
                 @endif
