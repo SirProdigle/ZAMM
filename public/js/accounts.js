@@ -1,4 +1,7 @@
 function DeleteUserAjax(id, element) {
+    if(!confirm('Delete User?')){
+        return;
+    }
     axios.post('/users/' + id + '/delete', {
         id: id
     }).catch(function (error) {
@@ -14,6 +17,9 @@ function DeleteUserAjax(id, element) {
 }
 
 function ChangeUserRoleAjax(id, role) {
+    if(!confirm('Change to ' + role + "?")){
+        return;
+    }
     axios.post('/users/' + id + '/role', {
         role: role
     }).catch(function (error) {

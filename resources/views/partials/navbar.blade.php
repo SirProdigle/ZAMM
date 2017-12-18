@@ -35,10 +35,10 @@
                         Zeus #2 Addon
                     </a>
                     <a class="navbar-item " href="/missions?server=2">
-                        Zeus #3
+                        Zeus #3 Spec Ops
                     </a>
                     <a class="navbar-item " href="/missions?server=3">
-                        Zeus #4
+                        Zeus #4 Special Events
                     </a>
                     <a class="navbar-item " href="/user/{{auth()->id()}}/missions">
                         My Missions

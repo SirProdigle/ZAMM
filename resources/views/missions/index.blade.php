@@ -19,7 +19,7 @@
             <th onclick="FilterBy('Notes')"><a href="#">Notes</a></th>
             <th>Review Link</th>
             <th>Download</th>
-            @if(auth()->user()->IsRoleOrAbove('Game Admin'))
+            @if(auth()->check() && auth()->user()->IsRoleOrAbove('Game Admin'))
                 <th>Delete</th>
             @endif
         </tr>
@@ -102,7 +102,7 @@
                         </span>
                     </button>
                 </td>
-                @if(auth()->user()->IsRoleOrAbove('Game Admin'))
+                @if(auth()->check() && auth()->user()->IsRoleOrAbove('Game Admin'))
                     <td>
                         <button class=" button is-danger is-small"
                                 onclick="DeleteMission(this.parentElement.parentElement.id,this.parentElement.parentElement)">
