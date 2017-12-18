@@ -45,14 +45,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Briefing Message</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="briefingDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="briefingDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">Detailed enough, listing all available assets and mission essential information to enable accurate pre-planning at briefing stage ?</p>
                         </div>
                     </div>
                 </div>
@@ -81,14 +80,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Equipment Message</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="equipmentDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="equipmentDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">Was your loadout and the overall equipment available to you sifficient to to achieve the mission objective. Did you need anything else</p>
                         </div>
                     </div>
                 </div>
@@ -117,14 +115,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Enemies Description</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="enemyDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="enemyDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">Too many, too few ? Deployed correctly ? Difficult or easy to defeat ?</p>
                         </div>
                     </div>
                 </div>
@@ -153,14 +150,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Location Description</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="locationDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="locationDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">Was the AO a good choice for this mission ? Was the terrain interesting enough and diverse enough ? Difficult or easy to defeat ? </p>
                         </div>
                     </div>
                 </div>
@@ -190,14 +186,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Objectives Description</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="objectivesDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="objectivesDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">Too many ? Too few ? Realistic ?Achievable ? </p>
                         </div>
                     </div>
                 </div>
@@ -206,7 +201,7 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Enjoyment</label>
+                        <label class="label">Overall Design</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
@@ -226,14 +221,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Enjoyment Description</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="enjoymentDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="enjoymentDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">What was good, bad about this mission, any opinions on how to improve it ? </p>
                         </div>
                     </div>
                 </div>
@@ -243,7 +237,7 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Player Competency</label>
+                        <label class="label">Implementation</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
@@ -263,14 +257,13 @@
 
                 <div class="field is-horizontal">
                     <div class="field-label is-normal">
-                        <label class="label">Competency Description</label>
                     </div>
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <textarea name="competencyDescription" placeholder="A message is optional. Refer to the help text below"></textarea>
+                                <textarea name="competencyDescription" placeholder="Add Optional Feedback Here"></textarea>
                             </div>
-                            <p class="help">You should include information about if the briefing contained enough information to play out the mission well</p>
+                            <p class="help">How well was this mission planned and managed by the group leaders and how did this effect your overall rating for the mission ? </p>
                         </div>
                     </div>
                 </div>

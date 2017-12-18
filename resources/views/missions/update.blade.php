@@ -43,23 +43,29 @@
 
             <div class="field is-horizontal">
                 <div class="field-label">
-                    <label class="label">Orbital Type</label>
+                    <label class="label">Orbat Type</label>
                 </div>
                 <div class="field-body">
                     <div class="field is-expanded">
                         <div class="field has-addons">
                             <p class="control  ">
-                                <input class="input" type="text" name="orbitalType" placeholder="Insert Custom Here" value="{{$mission->orbitalType}}">
+                                <input class="input" type="text" name="orbitalType" placeholder="Insert Custom Here" id="orbitalType" value="{{$mission->orbitalType}}">
                             </p>
                             <p class="control">
                                 <button class="button is-static">Presets:</button>
                             </p>
                             <p class="control">
                             <div class="select">
-                                <select name="" id="">
-                                    <option value="">MAKE THESE INPUT JS INTO THE TEXT CONTROL BELOW</option>
-                                    <option value="">Artillery</option>
-                                    <option value="">Air CAS</option>
+                                <select name="" id=" " onchange="FillInBox('orbitalType',this)">
+                                    <option value="" onclick="FillInBox('orbitalType','Infantry')">N/A</option>
+                                    <option value="Infantry" onclick="FillInBox('orbitalType','Infantry')">Infantry</option>
+                                    <option value="Marines" onclick="FillInBox('orbitalType','Marines')">Marines</option>
+                                    <option value="Amphibious" onclick="FillInBox('orbitalType','Amphibious')">Amphibious</option>
+                                    <option value="Motorised Infantry" onclick="FillInBox('orbitalType','Motorised')">Motorised Infantry</option>
+                                    <option value="Mechanised Infantry" onclick="FillInBox('orbitalType','Mechanised Infantry')">Mechanised Infantry</option>
+                                    <option value="Air Mobile Infantry" onclick="FillInBox('orbitalType','Air Mobile Infantry')">Air Mobile Infantry</option>
+                                    <option value="Armoured" onclick="FillInBox('orbitalType','Armoured')">Armoured</option>
+                                    <option value="All Arms" onclick="FillInBox('orbitalType','All Arms')">All Arms</option>
                                 </select>
                             </div>
                             </p>
@@ -72,10 +78,25 @@
                     <label class="label">Support Assets</label>
                 </div>
                 <div class="field-body">
-                    <div class="field">
-                        <p class="control">
-                            <textarea name="supportAssets" class="textarea" id="" cols="20" rows="2">{{$mission->supportAssets}}</textarea>
-                        </p>
+                    <div class="field is-expanded">
+                        <div class="field has-addons">
+                            <p class="control  ">
+                                <input class="input" type="text" name="supportAssets" placeholder="Insert Custom Here" id="supportAssets" value="{{$mission->supportAssets}}">
+                            </p>
+                            <p class="control">
+                                <button class="button is-static">Presets:</button>
+                            </p>
+                            <p class="control">
+                            <div class="select">
+                                <select name="" id="" onchange="FillInBox('supportAssets',this)">
+                                    <option value="">N/A</option>
+                                    <option value="Artillery">Artillery</option>
+                                    <option value="CAS">CAS</option>
+                                    <option value="Mortars">Mortars</option>
+                                </select>
+                            </div>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

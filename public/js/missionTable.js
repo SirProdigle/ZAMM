@@ -133,3 +133,7 @@ function AddStatusClass(Status, ele){
     }
 }
 
+function FillInBox(ToFill,SelectBox ){
+   document.getElementById(ToFill).value = SelectBox.value;
+}
+

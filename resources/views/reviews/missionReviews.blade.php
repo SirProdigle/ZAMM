@@ -44,13 +44,13 @@
         </div>
         <div class="level-item has-text-centered">
             <div>
-                <p class="heading">Enjoyment</p>
+                <p class="heading">Design</p>
                 <p class="title">{{number_format($mission->reviews()->avg('enjoyment'),1)}}</p>
             </div>
         </div>
         <div class="level-item has-text-centered">
             <div>
-                <p class="heading">Overall</p>
+                <p class="heading">Average Score</p>
                 <p class="title">{{number_format($mission->GetOverallScore(),1)}}</p>
             </div>
         </div>
@@ -121,7 +121,7 @@
                     <hr>
                     <div class="columns">
                         <div class="column is-111">
-                            <div class="title">Enjoyment</div>
+                            <div class="title">Design </div>
                             {{$review->enjoymentDescription}}
                         </div>
                         <div class="column is-1 title">{{$review->enjoyment}}</div>
