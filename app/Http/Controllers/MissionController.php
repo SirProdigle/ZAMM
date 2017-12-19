@@ -49,6 +49,7 @@ class MissionController extends Controller
                 $mis->status = "New";
                 $mis->save();
             }
+        \Log::info(auth()->user()->name . " Updated " . $mis->fileName);
         return redirect('/missions?server=' . Mission::find($id)->serverNumber);
     }
 
@@ -87,6 +88,7 @@ class MissionController extends Controller
     public function Delete(Mission $mission){
         try {
             $mission->delete();
+            \Log::info(auth()->user()->name . " Deleted " . $mission->fileName);
             return ("Deleted Successfully");
         }
         catch (\Exception $e){

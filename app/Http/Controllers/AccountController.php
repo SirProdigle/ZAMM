@@ -39,6 +39,7 @@ class AccountController extends Controller
                 }
                 //We are a senior admin, they are not. This is fine
                 $user->delete();
+                \Log::info(auth()->user()->name . " Removed User  " . $user->name);
                 return "OK";
             }
         }
@@ -52,6 +53,7 @@ class AccountController extends Controller
             if($activeUser->IsAboveRole($user->role) && $activeUser->IsAboveRole($role)){
                 $user->role = $role;
                 $user->save();
+                \Log::info(auth()->user()->name . " Changed Role For  " . $user->name . " to ". $role);
                 return "OK";
             }
             else{
