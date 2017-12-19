@@ -59,8 +59,13 @@ class UpdateMissionDatabase
                         unset($tempDName[0]);
                         $dbMission->displayName = implode(' ', $tempDName);
                         $dbMission->status = 'Updated';
-
-                        $dbMission->save();
+                        if(Mission::where('fileName',$fileMission->fileName)->count() > 0){
+                            // We have 2 missions stored of different version
+                            \Log::error('Mission: ' . $dbMission->fileName . ' has multiple version stored in the folder. We cannot process a version update');
+                        }
+                        else {
+                            $dbMission->save();
+                        }
 
                     }
                     //Remove from list to insert
