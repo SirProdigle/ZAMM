@@ -112,7 +112,6 @@ class UpdateMissionDatabase
             }
             $missionsToInsert[] = $missionData;
         }
-        dd($missionsToInsert);
         Mission::insert($missionsToInsert); //FIXME This only works if the entire array is correctly formatted. Add one after the other for now
         \DB::enableQueryLog();
     }
@@ -150,7 +149,7 @@ class MissionData
         $this->fileName = $fileName;
         $this->server = $server;
         try {
-            $this->version = substr(explode(' v', $this->fileName)[1], 0, 2);
+            $this->version = substr(explode(' v', strtolower( $this->fileName))[1], 0, 2);
             $this->version = preg_replace("/[^0-9]/", "", $this->version);
             $this->version = (int)$this->version;
             if (strpos($this->version, '')) {
