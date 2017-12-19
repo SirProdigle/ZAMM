@@ -40,6 +40,12 @@
                     <a class="navbar-item " href="/missions?server=3">
                         Zeus #4 Special Events
                     </a>
+                    <a class="navbar-item " href="/missions?server=4">
+                        Zeus #1 Test
+                    </a>
+                    <a class="navbar-item " href="/missions?server=5">
+                        Zeus #2 Test
+                    </a>
                     <a class="navbar-item " href="/user/{{auth()->id()}}/missions">
                         My Missions
                     </a>
