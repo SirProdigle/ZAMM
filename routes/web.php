@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/missions','MissionController@Index')->middleware('updateMissions');
+Route::get('/missions','MissionController@Index')->middleware('updateMissions:' . request()->get('server'));
 
 Auth::routes();
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

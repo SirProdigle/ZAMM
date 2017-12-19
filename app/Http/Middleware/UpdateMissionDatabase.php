@@ -17,14 +17,15 @@ class UpdateMissionDatabase
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
+     * @param int $serverNum
      * @return mixed
      */
 
 
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $serverNum)
     {
-        $missionList = $this->GrabMissions();
-        $missionList = $this->CheckForUpdatedMissions($missionList);
+        $missionList = $this->GrabMissions($serverNum);
+        $missionList = $this->CheckForUpdatedMissions($missionList, $serverNum);
         $this->InsertNewMissions($missionList);
 
 
@@ -32,28 +33,21 @@ class UpdateMissionDatabase
     }
 
 
-    public function CheckForUpdatedMissions($missionList)
+    public function CheckForUpdatedMissions($missionList, $serverNum)
     {
-        $Server0MissionsFile = [];
-        $Server1MissionsFile = [];
+        $ServerMissionsFile =[];
 
         foreach ($missionList as $potentialMission) {
-            if ($potentialMission->server == 0) {
-                $Server0MissionsFile[] = $potentialMission;
-            }
-        }
-        foreach ($missionList as $potentialMission) {
-            if ($potentialMission->server == 1) {
-                $Server1MissionsFile[] = $potentialMission;
-            }
+                $ServerMissionsFile[] = $potentialMission;
         }
 
-        $Server0MissionsDatabase = Mission::where('serverNumber', 0)->get();
+
+        $ServerMissionsDatabase = Mission::where('serverNumber', $serverNum)->get();
 
         $indicesToRemove = [];
-        foreach ($Server0MissionsDatabase as $dbMission) {
+        foreach ($ServerMissionsDatabase as $dbMission) {
 
-            foreach ($Server0MissionsFile as $fileMission) {
+            foreach ($ServerMissionsFile as $fileMission) {
                 if (explode(' v', $dbMission->fileName)[0] == explode(' v', $fileMission->fileName)[0]) {
                     if ($dbMission->version < $fileMission->version && $dbMission->island == $fileMission->island) {
                         //Needs to be updated;
@@ -81,39 +75,6 @@ class UpdateMissionDatabase
                 }
             }
         }
-        $missionList = array_diff_key($missionList, array_flip($indicesToRemove));
-        $missionList = array_values($missionList);
-
-        $Server1MissionsDatabase = Mission::where('serverNumber', 1)->get();
-
-        $indicesToRemove = [];
-        foreach ($Server1MissionsDatabase as $dbMission) {
-
-            foreach ($Server1MissionsFile as $fileMission) {
-
-                if (explode(' v', $dbMission->fileName)[0] == explode(' v', $fileMission->fileName)[0]) {
-                    if ($dbMission->version < $fileMission->version) {
-                        //Needs to be updated;
-
-                        //dd("Db: " . $dbMission->fileName . " " . $dbMission->version . "\nFile: " . $fileMission->fileName . " " . $fileMission->version);
-
-                        $dbMission->version = $fileMission->version;
-                        $dbMission->save();
-
-                    }
-                    //We need to remove this copy from our listing
-                    for ($x = 0; $x < count($missionList); $x++) {
-                        if ($missionList[$x]->fileName == $fileMission->fileName) {
-                            $indicesToRemove[] = $x;
-                            //unset($missionList[$x]);
-                            //$missionList = array_values($missionList);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
         $missionList = array_diff_key($missionList, array_flip($indicesToRemove));
         $missionList = array_values($missionList);
         return $missionList;
@@ -156,20 +117,18 @@ class UpdateMissionDatabase
     }
 
 
-    public function GrabMissions()
+    public function GrabMissions($num)
     {
         $missionsToReturn = [];
 
         $directories = config('mission.directories');
-        for ($i = 0; $i < count($directories); $i++) {
-            $files = scandir($directories[$i]);
+            $files = scandir($directories[$num]);
             foreach ($files as $filename) {
                 if (substr($filename, -4) == ".pbo") {
-                    $readMission = new MissionData($filename, $i);
+                    $readMission = new MissionData($filename, $num);
                     $missionsToReturn[] = $readMission;
                 }
             }
-        }
         return $missionsToReturn;
     }
 }
