@@ -82,7 +82,7 @@
                         <option {{$mission->completed == 1? 'selected':''}} value="1">Yes</option>
                         <option value="0" {{$mission->completed == 0? 'selected':''}}>No</option>
                     </select></td>
-                <td class="text-center"><a href="#">N/A</a></td>
+                <td class="text-center"><a href="/mission/{{$mission->id}}/bugs">{{$mission->bugs->count()}}</a></td>
                 <td class="text-center"><a
                             href="/mission/{{$mission->id}}/reviews">{{number_format($mission->GetOverallScore(),1) }}</a>
                 </td>

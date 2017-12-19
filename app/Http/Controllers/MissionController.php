@@ -35,7 +35,12 @@ class MissionController extends Controller
     public function userMissions($id)
     {
         $missionList = Mission::where('user_id', $id)->get();
-        $disabled = false;
+        if(auth()->id() == $id || auth()->user()->isRoleOrAbove('Game Admin')) {
+            $disabled = false;
+        }
+        else{
+            $disabled = true;
+        }
         $authorList = $this->GetAuthorList();
         return view('missions.index', compact(['missionList','disabled','authorList']));
     }

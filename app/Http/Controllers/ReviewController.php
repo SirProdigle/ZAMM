@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mission;
 use App\Review;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -14,6 +15,12 @@ class ReviewController extends Controller
     public function index($id){
         $mission = Mission::find($id);
         return view('reviews.index',compact('mission'));
+    }
+    public function userReviews(User $user){
+        if(auth()->user()->isRoleOrAbove('Senior Admin')) {
+            return view('reviews.user', compact('user'));
+        }
+        else return back();
     }
 
     public function AddReview(Request $request){

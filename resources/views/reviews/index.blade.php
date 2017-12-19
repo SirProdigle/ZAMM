@@ -16,8 +16,16 @@
                 </ul>
             </div>
         @endif
-
         <div class="box">
+            <div class="container is-fluid">
+                <button class=" button is-info"
+                        onclick="window.location = '/bug/create/{{$mission->id}}'">
+                    <span>Submit A Bug Report</span>
+                    <span class="icon">
+                            <i class="fa fa-check"></i>
+                        </span>
+                </button>
+            </div>
             <form action="/review" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="mission_id" value="{{$mission->id}}">

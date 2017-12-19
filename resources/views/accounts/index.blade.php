@@ -19,7 +19,7 @@
 
         <tbody>
         @foreach ($users as $user)
-            <tr id="{{$user->id}}">
+            <a id="{{$user->id}}">
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td> @if (!auth()->user()->IsAboveRole($user->role))
@@ -32,15 +32,16 @@
                     </select>
                     @endif
                 </td>
-                <td>{{$user->missions()->count()}}</td>
-                <td>{{$user->reviews()->count()}}</td>
+                <td><a href="/user/{{$user->id}}/missions">{{$user->missions()->count()}}</a></td>
+                <td><a href="/users/{{$user->id}}/reviews"> {{$user->reviews()->count()}}</a></td>
                 @if(auth()->user()->IsRoleOrAbove('Senior Admin'))
-                    <td>@if($user->reviews()->count() > 0)
+                    <td> @if($user->reviews()->count() > 0)
                             {{$user->reviews()->orderby('created_at','desc')->first()->ip}}</td>
                 @endif
                 @else
                     0
                 @endif
+            </a>
                 <td>
                     <button class="button is-danger is-small"
                             onclick="DeleteUserAjax( {{$user->id}} ,this.parentElement)">Delete

@@ -42,4 +42,12 @@ Route::post('/users/{id}/delete','AccountController@RemoveUser')->middleware('au
 Route::get('/mission/{mission}/delete','MissionController@Delete')->middleware(['auth','mustBeAdmin']);
 
 Route::post('/users/{user}/role','AccountController@ChangeRole')->middleware('auth');
+Route::get('/users/{user}/reviews','ReviewController@userReviews')->middleware('mustBeAdmin');
 
+Route::get('/mission/{mission}/bugs','BugController@index')->middleware('auth');
+
+Route::get('/bug/create/{mission}','BugController@ShowCreate');
+
+Route::post('/bug/create','BugController@Create');
+
+Route::post('/bug/delete/{bug}','BugController@Delete');
