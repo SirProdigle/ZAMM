@@ -93,7 +93,7 @@
                 </td>
                 <td><input onchange="UpdateRow(this.parentElement.parentElement)" type="text"
                            value="{{$mission->notes}}"></td>
-                <td><a href="/review/{{$mission->id}}">Review Link</a></td>
+                <td><a href="/review/{{$mission->id}}">Review</a></td>
 
                 <td class="is-centered">
                     <button class=" button is-info is-small">
