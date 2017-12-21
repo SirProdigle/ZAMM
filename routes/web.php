@@ -51,3 +51,5 @@ Route::get('/bug/create/{mission}','BugController@ShowCreate');
 Route::post('/bug/create','BugController@Create');
 
 Route::post('/bug/delete/{bug}','BugController@Delete');
+
+Route::get('/mission/{mission}/download','MissionController@Download');

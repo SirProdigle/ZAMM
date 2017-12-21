@@ -96,7 +96,7 @@
                 <td><a href="/review/{{$mission->id}}">Review</a></td>
 
                 <td class="is-centered">
-                    <button class=" button is-info is-small">
+                    <button class=" button is-info is-small" onclick="document.location ='/mission/{{$mission->id}}/download'">
                         <span class="icon">
                             <i class="fa fa-save"></i>
                         </span>

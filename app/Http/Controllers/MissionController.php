@@ -87,8 +87,10 @@ class MissionController extends Controller
 
     }
 
-    public function Download(){
-
+    public function Download(Mission $mission){
+        $directories = config('mission.directories');
+        $pathToFile = $directories[$mission->serverNumber] . '/' . $mission->fileName;
+        return response()->download($pathToFile);
     }
     public function Delete(Mission $mission){
         try {
