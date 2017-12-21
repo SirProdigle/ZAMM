@@ -22,11 +22,22 @@ class UpdateMissionDatabase
      */
 
 
-    public function handle($request, Closure $next, $serverNum)
+    //If no servernum is given then update for all servers
+    public function handle($request, Closure $next, $serverNum = -1)
     {
-        $missionList = $this->GrabMissions($serverNum);
-        $missionList = $this->CheckForUpdatedMissions($missionList, $serverNum);
-        $this->InsertNewMissions($missionList);
+        if($serverNum == -1) {
+            for ($i = 0; $i < sizeof(config('mission.directories')); $i++) {
+                $missionList = $this->GrabMissions($i);
+                $missionList = $this->CheckForUpdatedMissions($missionList, $i);
+                $this->InsertNewMissions($missionList);
+                $missionList = [];
+            }
+        }
+        else {
+            $missionList = $this->GrabMissions($serverNum);
+            $missionList = $this->CheckForUpdatedMissions($missionList, $serverNum);
+            $this->InsertNewMissions($missionList);
+        }
 
 
         return $next($request);
