@@ -32,3 +32,43 @@ function UpdateStarRating(RatingBox, StarNum) {
         }
     }
 }
+
+function reviewIsOkay(){
+
+    var briefing = document.getElementsByName('briefing')[0].value;
+    if(briefing === null || briefing === ""){
+        alert("Briefing not set");
+        return false;
+    }
+    var  equipment= document.getElementsByName('equipment')[0].value;
+    if(equipment === ""){
+        alert("Equipment not set");
+        return false;
+    }
+    var enemies = document.getElementsByName('enemy')[0].value;
+    if(enemies === ""){
+        alert("Enemies not set");
+        return false;
+    }
+    var location = document.getElementsByName('location')[0].value;
+    if(location === ""){
+        alert("Location not set");
+        return false;
+    }
+    var objectives = document.getElementsByName('objectives')[0].value;
+    if(objectives === ""){
+        alert("Objectives not set");
+        return false;
+    }
+    var enjoyment = document.getElementsByName('enjoyment')[0].value;
+    if(enjoyment === ""){
+        alert("Overall Design not set");
+        return false;
+    }
+    var competency = document.getElementsByName('competency')[0].value;
+    if(competency === ""){
+        alert("Implementation not set");
+        return false;
+    }
+    return true;
+}

@@ -26,7 +26,7 @@
                         </span>
                 </button>
             </div>
-            <form action="/review" method="post">
+            <form action="/review" method="post" onsubmit="return reviewIsOkay()">
                 {{csrf_field()}}
                 <input type="hidden" name="mission_id" value="{{$mission->id}}">
 

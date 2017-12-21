@@ -25,16 +25,15 @@ class UpdateMissionDatabase
     //If no servernum is given then update for all servers
     public function handle($request, Closure $next, $serverNum = -1)
     {
-        if($serverNum == -1) {
-            return; //This will fail on any servers with invalid missions so return for now
+        if ($serverNum == -1) {
+            return $next($request); //This will fail on any servers with invalid missions so return for now
             for ($i = 0; $i < sizeof(config('mission.directories')); $i++) {
                 $missionList = $this->GrabMissions($i);
                 $missionList = $this->CheckForUpdatedMissions($missionList, $i);
                 $this->InsertNewMissions($missionList);
                 $missionList = [];
             }
-        }
-        else {
+        } else {
             $missionList = $this->GrabMissions($serverNum);
             $missionList = $this->CheckForUpdatedMissions($missionList, $serverNum);
             $this->InsertNewMissions($missionList);
@@ -47,10 +46,10 @@ class UpdateMissionDatabase
 
     public function CheckForUpdatedMissions($missionList, $serverNum)
     {
-        $ServerMissionsFile =[];
+        $ServerMissionsFile = [];
 
         foreach ($missionList as $potentialMission) {
-                $ServerMissionsFile[] = $potentialMission;
+            $ServerMissionsFile[] = $potentialMission;
         }
 
 
@@ -71,11 +70,10 @@ class UpdateMissionDatabase
                         unset($tempDName[0]);
                         $dbMission->displayName = implode(' ', $tempDName);
                         $dbMission->status = 'Updated';
-                        if(Mission::where('fileName',$fileMission->fileName)->count() > 0){
+                        if (Mission::where('fileName', $fileMission->fileName)->count() > 0) {
                             // We have 2 missions stored of different version
                             \Log::error('Mission: ' . $dbMission->fileName . ' has multiple version stored in the folder. We cannot process a version update');
-                        }
-                        else {
+                        } else {
                             $dbMission->save();
                         }
 
@@ -139,13 +137,13 @@ class UpdateMissionDatabase
         $missionsToReturn = [];
 
         $directories = config('mission.directories');
-            $files = scandir($directories[$num]);
-            foreach ($files as $filename) {
-                if (substr($filename, -4) == ".pbo") {
-                    $readMission = new MissionData($filename, $num);
-                    $missionsToReturn[] = $readMission;
-                }
+        $files = scandir($directories[$num]);
+        foreach ($files as $filename) {
+            if (substr($filename, -4) == ".pbo") {
+                $readMission = new MissionData($filename, $num);
+                $missionsToReturn[] = $readMission;
             }
+        }
         return $missionsToReturn;
     }
 }
@@ -166,7 +164,7 @@ class MissionData
         $this->fileName = $fileName;
         $this->server = $server;
         try {
-            $this->version = substr(explode(' v', strtolower( $this->fileName))[1], 0, 2);
+            $this->version = substr(explode(' v', strtolower($this->fileName))[1], 0, 2);
             $this->version = preg_replace("/[^0-9]/", "", $this->version);
             $this->version = (int)$this->version;
             if (strpos($this->version, '')) {
