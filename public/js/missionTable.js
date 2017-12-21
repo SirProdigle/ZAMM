@@ -23,7 +23,7 @@ function UpdateRow(rowElement) {
     var LastPlayed = rowCells[13].childNodes[1].value;
     var Notes = rowCells[25].childNodes[0].value;
     var Completed = rowCells[15].childNodes[0].value;
-    if(Author === "???"){
+    if (Author === "???") {
         Author = null;
     }
     axios.post('/mission/' + id, {
@@ -65,13 +65,13 @@ function sortTable(n) {
             if (dir == "asc") {
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
-                    shouldSwitch= true;
+                    shouldSwitch = true;
                     break;
                 }
             } else if (dir == "desc") {
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
-                    shouldSwitch= true;
+                    shouldSwitch = true;
                     break;
                 }
             }
@@ -82,7 +82,7 @@ function sortTable(n) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
             // Each time a switch is done, increase this count by 1:
-            switchcount ++;
+            switchcount++;
         } else {
             /* If no switching has been done AND the direction is "asc",
             set the direction to "desc" and run the while loop again. */
@@ -94,13 +94,11 @@ function sortTable(n) {
     }
 }
 
-function DeleteMission(id, ElementToDestroy){
-    if(confirm("Really Delete Mission?") === false){
+function DeleteMission(id, ElementToDestroy) {
+    if (confirm("Really Delete Mission?") === false) {
         return;
     }
-    axios.get('/mission/' + id+'/delete', {
-
-    }).catch(function(error){
+    axios.get('/mission/' + id + '/delete', {}).catch(function (error) {
         console.log(error);
         //alert(error);
     }).then(function (response) {
@@ -112,30 +110,30 @@ function DeleteMission(id, ElementToDestroy){
 
 }
 
-function AddStatusClass(Status, ele){
-    console.log("S " +Status);
-    switch (Status){
-        case "Online":{
+function AddStatusClass(Status, ele) {
+    console.log("S " + Status);
+    switch (Status) {
+        case "Online": {
             ele.classList = null;
             ele.classList.add('is-online');
             break;
         }
-        case "Updated":{
+        case "Updated": {
             ele.classList = null;
             ele.classList.add('is-updated');
             break;
         }
-        case "New":{
+        case "New": {
             ele.classList = null;
             ele.classList.add('is-new');
             break;
         }
-        case "Broken":{
+        case "Broken": {
             ele.classList = null;
             ele.classList.add('is-broken');
             break;
         }
-        case "Pending Details":{
+        case "Pending Details": {
             ele.classList = null;
             ele.classList.add('is-pending');
             break;
@@ -143,7 +141,36 @@ function AddStatusClass(Status, ele){
     }
 }
 
-function FillInBox(ToFill,SelectBox ){
-   document.getElementById(ToFill).value = SelectBox.value;
+function FillInBox(ToFill, SelectBox) {
+    document.getElementById(ToFill).value = SelectBox.value;
+}
+
+
+function MoveMissionShowBox(row) {
+    var currentServer = decodeURIComponent(window.location.search.match(/(\?|&)server\=([^&]*)/)[2]);
+    var missionDisplay = (row.childNodes[9].innerText);
+    var modal = document.getElementById('moveMissionModal');
+    document.getElementById('move-message').innerText = "Mission: " + missionDisplay;
+    document.getElementById('moveMissionID').innerText = row.id;
+    modal.classList.add('is-active');
+}
+
+function MoveMissionCloseBox() {
+    var modal = document.getElementById('moveMissionModal');
+    modal.classList.toggle('is-active');
+}
+
+function MoveMission(id, server) {
+    axios.get('/mission/' + id + /move/ + server, {}).then(function (response) {
+        document.getElementById('moveMissionModal').classList.toggle('is-active');
+        if (response.data === "OK") {
+            alert("Mission Moved Successfully");
+            document.getElementById(id).innerHTML = "";
+        }
+        else
+            alert(response.data);
+    });
+
+
 }
 

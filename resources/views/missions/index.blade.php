@@ -18,7 +18,10 @@
             <th onclick="FilterBy('LastUpdated')"><a href="#">Last Updated</a></th>
             <th onclick="FilterBy('Notes')"><a href="#">Notes</a></th>
             <th>Review Link</th>
-            <th>Download</th>
+            <th>Save</th>
+            @if(auth()->check() && auth()->user()->IsRoleOrAbove('Game Admin'))
+                <th>Move</th>
+            @endif
             @if(auth()->check() && auth()->user()->IsRoleOrAbove('Game Admin'))
                 <th>Delete</th>
             @endif
@@ -96,12 +99,23 @@
                 <td><a href="/review/{{$mission->id}}">Review</a></td>
 
                 <td class="is-centered">
-                    <button class=" button is-info is-small" onclick="document.location ='/mission/{{$mission->id}}/download'">
+                    <button class=" button is-info is-small"
+                            onclick="document.location ='/mission/{{$mission->id}}/download'">
                         <span class="icon">
                             <i class="fa fa-save"></i>
                         </span>
                     </button>
                 </td>
+                @if(auth()->check() && auth()->user()->IsRoleOrAbove('Game Admin'))
+                    <td>
+                        <button class=" button is-primary is-small"
+                                onclick="MoveMissionShowBox(this.parentElement.parentElement);">
+                        <span class="icon">
+                            <i class="fa fa-exchange"></i>
+                        </span>
+                        </button>
+                    </td>
+                @endif
                 @if(auth()->check() && auth()->user()->IsRoleOrAbove('Game Admin'))
                     <td>
                         <button class=" button is-danger is-small"
@@ -118,6 +132,38 @@
         @endforeach
         </tbody>
     </table>
+
+    <!-- MODAL FOR MOVING FILE !-->
+    <div class="modal" id="moveMissionModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Move Mission</p>
+                <button class="delete" aria-label="close" onclick="MoveMissionCloseBox()"></button>
+            </header>
+            <section class="modal-card-body">
+                <p id="move-message">Mission Y is currently in server z </p>
+                <div class="field">
+                    <label class="label">Move To Server</label>
+                    <div class="control">
+                        <select id="moveMissionServer">
+                            <option value="0"> Zeus #1</option>
+                            <option value="1"> Zeus #2</option>
+                            <option value="2"> Zeus #3</option>
+                            <option value="3"> Zeus #4</option>
+                            <option value="4"> Zeus Test #1</option>
+                            <option value="5"> Zeus Test #2</option>
+                        </select>
+                        <input type="hidden" id="moveMissionID" value="">
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success" onclick="MoveMission(document.getElementById('moveMissionID').innerText,document.getElementById('moveMissionServer').value)">Move File</button>
+                <button class="button" onclick="MoveMissionCloseBox()">Cancel</button>
+            </footer>
+        </div>
+    </div>
 
 
 @endsection

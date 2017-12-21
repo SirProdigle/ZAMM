@@ -26,6 +26,7 @@ class UpdateMissionDatabase
     public function handle($request, Closure $next, $serverNum = -1)
     {
         if($serverNum == -1) {
+            return; //This will fail on any servers with invalid missions so return for now
             for ($i = 0; $i < sizeof(config('mission.directories')); $i++) {
                 $missionList = $this->GrabMissions($i);
                 $missionList = $this->CheckForUpdatedMissions($missionList, $i);

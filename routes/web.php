@@ -53,3 +53,5 @@ Route::post('/bug/create','BugController@Create');
 Route::post('/bug/delete/{bug}','BugController@Delete');
 
 Route::get('/mission/{mission}/download','MissionController@Download');
+
+Route::get('/mission/{mission}/move/{serverNumber}','MissionController@MoveMission')->middleware('auth');
