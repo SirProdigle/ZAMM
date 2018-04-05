@@ -1,6 +1,214 @@
 @extends('layouts.master')
 @section('content')
 
+
+    <button class="button is-primary" onclick="ToggleFilterList(document.getElementById('filtering'),this)">Open
+        Filtering
+        Window
+    </button>
+    <div class="container ">
+        <div id="filtering" style="display: none">
+
+            <form action="/missions" method="get">
+                <input type="hidden" name="server" value="{{$serverNum}}">
+                <div class="level">
+                    <!-- 1 !-->
+                    <div class="level-item">
+                        <div>
+                            <div class="is-block filter-bar ">
+                                <h1 class="text-center filter-title">Status</h1>
+                                <select class="select is-fullwidth" name="status">
+                                    <option value="Any">Any</option>
+                                    <option value="Online">Online</option>
+                                    <option value="New">New</option>
+                                    <option value="Updated">Updated</option>
+                                    <option value="Broken">Broken</option>
+                                    <option value="Pending Details">Pending Details</option>
+                                    <option value="Pending Upload">Pending Upload</option>
+                                </select>
+
+                            </div>
+                            <div class="is-block filter-bar">
+                                <h1 class="text-center filter-title">Last Played</h1>
+                                <select name="lastPlayed_filter" class="">
+                                    <option><</option>
+                                    <option>></option>
+                                    <option>=</option>
+                                </select>
+                                <input type="date" name="lastPlayed" value="2999-01-01">
+                            </div>
+                            <div class="is-block filter-bar">
+                                <h1 class="text-center filter-title">Friendly Faction</h1>
+                                <select name="friendlyFaction" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($friendlyFactionList as $faction)
+                                        <option>{{$faction->friendlyFaction}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="is-block">
+                                <h1 class="text-center filter-title">Enemy Faction</h1>
+                                <select name="enemyFaction" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($friendlyFactionList as $faction)
+                                        <option>{{$faction->friendlyFaction}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 2 !-->
+                    <div class="level-item">
+                        <div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Game Type</h1>
+                                <select class="select is-fullwidth" name="gameType">
+                                    <option>Any</option>
+
+                                    <option value="">ad</option>
+                                    <option value="">co</option>
+                                    <option value="">zgm</option>
+
+                                    <option value="">ad@</option>
+                                    <option value="">co@</option>
+                                    <option value="">zgm@</option>
+                                </select>
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Completed</h1>
+                                <select name="completed" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    <option>True</option>
+                                    <option>False</option>
+                                </select>
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Friendly Orbat</h1>
+                                <select name="friendlyOrbatType" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($friendlyOrbatList as $orbat)
+                                        <option>{{$orbat->friendlyOrbatType}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Enemy Orbat</h1>
+                                <select name="enemyOrbatType" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($friendlyOrbatList as $orbat)
+                                        <option>{{$orbat->friendlyOrbatType}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Min Player !-->
+                    <div class="level-item">
+                        <div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Min Players</h1>
+                                <select name="min_filter">
+                                    <option> <</option>
+                                    <option selected> ></option>
+                                    <option> =</option>
+                                </select>
+                                <input type="number" name="min" min="-1" max="200" value="-1">
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Bugs</h1>
+                                <select name="bugs" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    <option>True</option>
+                                    <option>False</option>
+                                </select>
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Friendly Support</h1>
+                                <select name="friendlySupportAssets" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($friendlySupportAssets as $support)
+                                        <option>{{$support->friendlySupportAssets}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Enemy Support</h1>
+                                <select name="enemySupportAssets" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($friendlySupportAssets as $support)
+                                        <option>{{$support->friendlySupportAssets}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Max Player !-->
+                    <div class="level-item">
+                        <div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Max Players</h1>
+                                <select name="max_filter">
+                                    <option> <</option>
+                                    <option selected> ></option>
+                                    <option> =</option>
+                                </select>
+                                <input type="number" name="max" min="0" max="200" value="0">
+
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Rating</h1>
+                                <select name="rating_filter">
+                                    <option><</option>
+                                    <option selected>></option>
+                                    <option>=</option>
+                                </select>
+                                <input type="number" name="rating" value="-0.1" step="0.1" max="5.0">
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Feedback Count</h1>
+                                <select name="feedback_filter">
+                                    <option><</option>
+                                    <option selected>></option>
+                                    <option>=</option>
+                                </select>
+                                <input type="number" name="feedback" value="-1" min="-1" max="9999" class="">
+                            </div>
+                            <div class=" filter-bar">
+                                <h1 class="text-center filter-title">Island</h1>
+                                <select name="island" class="select is-fullwidth">
+                                    <option>Any</option>
+                                    @foreach ($islandList as $island)
+                                        <option>{{$island->island}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Author !-->
+                    <div class="level-item">
+                        <div>
+                            <h1 class="text-center filter-title">Author</h1>
+                            <select name="author" class="select is-fullwidth">
+                                <option>Any</option>
+                                @foreach($authorList as $author)
+                                    <option value="{{$author->id}}">{{$author->name}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="level">
+                    <div class="level-item">
+                        <input type="submit" class="button is-info" value="Filter Missions">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
     <table class="table is-narrow is-fullwidth is-striped">
         <thead>
         <tr>
@@ -60,10 +268,7 @@
                     </select>
                 </td>
                 <td>{{$mission->gameType}}</td>
-                <td>
-                    <input onchange="UpdateRow(this.parentElement.parentElement)"
-                           {{$disabled==true?'disabled':''}} type="number" value="{{$mission->min}}" min="0" max="200">
-                </td>
+                <td>{{$mission->min}}</td>
                 <td>{{$mission->max}}</td>
                 <td><a href="/mission/{{$mission->id}}">{{$mission->displayName}}</a></td>
                 <td><select name="user_id"
@@ -159,7 +364,10 @@
                 </div>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success" onclick="MoveMission(document.getElementById('moveMissionID').innerText,document.getElementById('moveMissionServer').value)">Move File</button>
+                <button class="button is-success"
+                        onclick="MoveMission(document.getElementById('moveMissionID').innerText,document.getElementById('moveMissionServer').value)">
+                    Move File
+                </button>
                 <button class="button" onclick="MoveMissionCloseBox()">Cancel</button>
             </footer>
         </div>

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Mission;
 use App\MissionRequest;
 use Closure;
+use DateTime;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Mockery\Exception;
@@ -65,6 +66,7 @@ class UpdateMissionDatabase
                         //dd("Db: " . $dbMission->fileName . " " . $dbMission->version . "\nFile: " . $fileMission->fileName . " " . $fileMission->version);
                         $dbMission->version = $fileMission->version;
                         $dbMission->fileName = $fileMission->fileName;
+                        $dbMission->lastUpdated = new DateTime();
                         $tempDName = explode(' ', $dbMission->fileName);
                         unset($tempDName[1]);
                         unset($tempDName[0]);

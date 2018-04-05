@@ -13,7 +13,19 @@ class MissionController extends Controller
     //
     public function index(Request $request)
     {
-        $missionList = Mission::where('serverNumber', $request->query('server'))->orderBy('gameType')->orderBy('max', 'desc')->get();
+        //Do the filtering
+        $missionList = NULL;
+        if($request->query('status')){
+            //we have a query!
+            $missionList = Mission::GetFilteredMissions($request);
+        }
+        else {
+            $missionList = Mission::where('serverNumber', $request->query('server'))->orderBy('gameType')->orderBy('max', 'desc')->get();
+        }
+
+        //Mission::GetFilteredMissions($request);
+
+
         if (auth()->check()) {
             if (auth()->user()->isRoleOrAbove('Game Admin')) {
                 $disabled = false;
@@ -24,9 +36,13 @@ class MissionController extends Controller
         }
 
         $authorList = $this->GetAuthorList();
+        $serverNum = $request->query('server');
+        $islandList = Mission::getAllIslands();
+        $friendlyOrbatList = Mission::GetAllOrbatTypes();
+        $friendlySupportAssets = Mission::GetAllSupportAssets();
+        $friendlyFactionList = Mission::GetAllFactions();
 
-
-        return view('missions.index', compact(['missionList', 'disabled', 'authorList']));
+        return view('missions.index', compact(['missionList', 'disabled', 'authorList','islandList','friendlyOrbatList','friendlySupportAssets','friendlyFactionList','serverNum']));
     }
 
     public function userMissions($id)
@@ -38,7 +54,8 @@ class MissionController extends Controller
             $disabled = true;
         }
         $authorList = $this->GetAuthorList();
-        return view('missions.index', compact(['missionList', 'disabled', 'authorList']));
+        $islandList = Mission::getAllIslands();
+        return view('missions.index', compact(['missionList', 'disabled', 'authorList','islandList']));
     }
 
 

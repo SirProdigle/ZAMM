@@ -43,3 +43,25 @@ background-color: darkgreen;
     background-color: orangered;
     color: white;
 }
+
+.margin-column{
+    margin-bottom: 20px !important;
+}
+
+.is-block{
+    display: block;
+}
+.is-center{
+    margin: auto;
+}
+
+.filter-bar{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.filter-title{
+    font-weight: bold;
+}
+#filtering{
+    margin-bottom: 50px;
+}

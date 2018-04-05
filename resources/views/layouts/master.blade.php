@@ -24,6 +24,7 @@
 <script src="/js/review.js"></script>
 <script src="/js/accounts.js"></script>
 <script src="/js/bugs.js"></script>
+<script src="/js/misc.js"></script>
 </body>
 
 
