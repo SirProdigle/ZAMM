@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-
+@if(isset($serverNum))
     <button class="button is-primary" onclick="ToggleFilterList(document.getElementById('filtering'),this)">Open
         Filtering
         Window
@@ -208,6 +208,8 @@
             </form>
         </div>
     </div>
+
+    @endif
 
     <table class="table is-narrow is-fullwidth is-striped">
         <thead>
