@@ -65,13 +65,13 @@
                                 <select class="select is-fullwidth" name="gameType">
                                     <option>Any</option>
 
-                                    <option value="">ad</option>
-                                    <option value="">co</option>
-                                    <option value="">zgm</option>
+                                    <option >ad</option>
+                                    <option >co</option>
+                                    <option >zgm</option>
 
-                                    <option value="">ad@</option>
-                                    <option value="">co@</option>
-                                    <option value="">zgm@</option>
+                                    <option >ad@</option>
+                                    <option>co@</option>
+                                    <option>zgm@</option>
                                 </select>
                             </div>
                             <div class=" filter-bar">
