@@ -72,14 +72,6 @@
 
                 </div>
             </div>
-
-
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link  is-active" href="/internationalorganisations/description">
-                    My Account
-                </a>
-            </div>
-        </div>
         @if(!auth()->check())
                 <a class="navbar-item " href="/password/reset">
                     Forgot/Reset Password
