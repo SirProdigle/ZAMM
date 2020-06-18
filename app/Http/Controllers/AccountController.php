@@ -28,10 +28,7 @@ class AccountController extends Controller
         if(auth()->user()->IsRoleOrAbove('Senior Admin')){
             //Only Senior Admins + can remove accounts
 
-            if(auth()->user()->IsRoleOrAbove('Super Admin') &&!$user == auth()->user() ){
-                return "OK"; //Super admins can delete anyone
-            }
-            else if($user->role =='Senior Admin' || $user->role == "Super Admin"){
+            if($user->role =='Senior Admin' || $user->role == "Super Admin"){
                 //DENY we cannot remove a senior admin or above through this method
                 return "Cannot delete someone of this ranking";
             }

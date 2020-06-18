@@ -19,7 +19,8 @@
 
         <tbody>
         @foreach ($users as $user)
-            <a id="{{$user->id}}">
+			<tr id="{{ $user->id }}">
+            <a id="{{ $user->id }}">
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td> @if (!auth()->user()->IsAboveRole($user->role))

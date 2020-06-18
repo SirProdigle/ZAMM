@@ -4,10 +4,12 @@
 return[
 
     'directories' => [
-        "C:/Users/rogue/Desktop/ExampleFiles/1",
-        "C:/Users/rogue/Desktop/ExampleFiles/2",
-        "C:/Users/rogue/Desktop/ExampleFiles/3",
-        "C:/Users/rogue/Desktop/ExampleFiles/4",
+        "D:\Games\ArmA3\A3S_No1\mpmissions",
+	"D:\Games\ArmA3\A3S_No2\mpmissions",
+	"D:\Games\ArmA3\A3S_No3\mpmissions",
+	"D:\Games\ArmA3\A3S_No4\mpmissions",
+	"D:\Games\ArmA3\A3S_No1Test\mpmissions",
+	"D:\Games\ArmA3\A3S_No2Test\mpmissions"
     ],
 
 ];
