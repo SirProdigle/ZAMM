@@ -120,6 +120,8 @@ class UpdateMissionDatabase
             $missionData['max'] = $mission->max;
             $missionData['island'] = $mission->island;
             $missionData['displayName'] = $mission->displayName;
+            
+            if($missionData['version'])
             try {
                 $mRequest = MissionRequest::where('fileName', $missionData['fileName'])->firstOrFail();
                 $missionData['user_id'] = $mRequest->user->id;
@@ -127,9 +129,10 @@ class UpdateMissionDatabase
             } catch (ModelNotFoundException $e) {
                 //No worries so just leave it
             }
-            $missionsToInsert[] = $missionData;
+            if(!in_array($missionData,$missionsToInsert)) {
+                Mission::updateOrCreate($missionData); //FIXME This only works if the entire array is correctly formatted. Add one after the other for now
+            }
         }
-        Mission::insert($missionsToInsert); //FIXME This only works if the entire array is correctly formatted. Add one after the other for now
         \DB::enableQueryLog();
     }
 
