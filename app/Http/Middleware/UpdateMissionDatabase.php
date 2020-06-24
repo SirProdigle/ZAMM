@@ -123,13 +123,13 @@ class UpdateMissionDatabase
             
             if($missionData['version'])
             try {
-                $mRequest = MissionRequest::where('fileName', $missionData['fileName'])->firstOrFail();
+                $mRequest = MissionRequest::where('fileName', 'LIKE', $missionData['displayName'])->firstOrFail();
                 $missionData['user_id'] = $mRequest->user->id;
                 $mRequest->delete();
             } catch (ModelNotFoundException $e) {
                 //No worries so just leave it
             }
-            if(!in_array($missionData,$missionsToInsert)) {
+            if(!in_array($missionData,$missionsToInsert) && $missionData['version']) {
                 Mission::updateOrCreate($missionData); //FIXME This only works if the entire array is correctly formatted. Add one after the other for now
             }
         }
